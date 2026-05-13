@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yellowstone 轻松版路线｜Bozeman 往返</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --card: #fffaf2;
+      --ink: #2d2a24;
+      --muted: #6f6658;
+      --green: #506d4f;
+      --deep: #2f4b3a;
+      --gold: #c28a3a;
+      --line: #e4d7c5;
+      --blue: #4c7087;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    header {
+      min-height: 72vh;
+      background:
+        linear-gradient(rgba(30, 44, 35, .54), rgba(30, 44, 35, .72)),
+        url("https://images.unsplash.com/photo-1500479694472-551d1fb6258d?auto=format&fit=crop&w=1800&q=80") center/cover;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 72px 8vw;
+    }
+    .hero {
+      max-width: 880px;
+    }
+    .eyebrow {
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: #f4d8a1;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: 1.05;
+      margin: 18px 0;
+    }
+    .hero p {
+      font-size: clamp(17px, 2vw, 22px);
+      max-width: 720px;
+      color: #fff3dd;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .tag {
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.24);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 14px;
+      backdrop-filter: blur(4px);
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 22px 80px;
+    }
+    section {
+      margin: 42px 0;
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      color: var(--deep);
+      margin: 0 0 18px;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 22px;
+      color: var(--green);
+      margin: 8px 0 10px;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 880px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(68, 52, 28, .07);
+    }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .route-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .route-line span {
+      background: #efe2cf;
+      color: #4a3d2b;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 14px;
+    }
+    .route-line b {
+      color: var(--gold);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+    th, td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #efe2cf;
+      color: var(--deep);
+    }
+    tr:last-child td { border-bottom: none; }
+    .day {
+      border-left: 6px solid var(--green);
+      position: relative;
+    }
+    .day-number {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 10px 0 0;
+    }
+    li { margin: 4px 0; }
+    .good { color: var(--deep); font-weight: 700; }
+    .avoid { color: #8b4a3c; font-weight: 700; }
+    .note {
+      background: #eef3ed;
+      border-left: 4px solid var(--green);
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: #394a38;
+      margin-top: 14px;
+    }
+    .hotel {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .hotel b { color: var(--deep); }
+    footer {
+      background: #26382e;
+      color: #efe8da;
+      padding: 36px 8vw;
+      text-align: center;
+    }
+    @media (max-width: 840px) {
+      header { padding: 56px 24px; min-height: 62vh; }
+      .span-4, .span-6, .span-8 { grid-column: span 12; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); }
+      td { border-bottom: none; padding: 10px 16px; }
+      td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--green);
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div class="eyebrow">Bozeman Round Trip · Easy Pace</div>
+      <h1>Yellowstone 轻松版路线</h1>
+      <p>以黄石为主，Teton 作为半日点缀；减少赶路、减少换宿、保留最核心的地热、湖泊、峡谷与雪山体验。</p>
+      <div class="hero-tags">
+        <span class="tag">5天4晚</span>
+        <span class="tag">BZN机场往返</span>
+        <span class="tag">第一晚 Bozeman</span>
+        <span class="tag">第二晚 Old Faithful</span>
+        <span class="tag">第三四晚 Canyon 连住</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>行程定位</h2>
+      <p class="lead">这条路线不是“黄石全覆盖打卡”，而是在有限时间内，以较低疲劳完成一次高质量 Yellowstone 公路旅行体验。Teton 只保留 Jenny Lake / Jackson Lake 一带的雪山湖泊氛围，不深入 Jackson 镇、不安排长徒步。</p>
+      <div class="grid">
+        <div class="card span-4">
+          <h3>核心比例</h3>
+          <p><b>Yellowstone ≈ 85%</b><br/>Teton ≈ 15%</p>
+        </div>
+        <div class="card span-4">
+          <h3>路线原则</h3>
+          <p>每天只设置一个主要主题，避免“每天都在赶路”。</p>
+        </div>
+        <div class="card span-4">
+          <h3>住宿原则</h3>
+          <p>采用 Old Faithful + Canyon 双基地，Canyon 连住两晚。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>每日路线总览</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>主题</th>
+            <th>住宿</th>
+            <th>路线核心</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="日期">Day 1</td>
+            <td data-label="主题">Bozeman 落地恢复</td>
+            <td data-label="住宿">Bozeman / Belgrade</td>
+            <td data-label="路线核心">取车、补给、晚餐、休息</td>
+          </tr>
+          <tr>
+            <td data-label="日期">Day 2</td>
+            <td data-label="主题">Yellowstone 地热核心</td>
+            <td data-label="住宿">Old Faithful</td>
+            <td data-label="路线核心">Mammoth 短停 → Grand Prismatic → Old Faithful → Upper Basin</td>
+          </tr>
+          <tr>
+            <td data-label="日期">Day 3</td>
+            <td data-label="主题">Teton 半日 + Yellowstone Lake</td>
+            <td data-label="住宿">Canyon</td>
+            <td data-label="路线核心">West Thumb → Jackson Lake → Jenny Lake → Yellowstone Lake → Hayden Valley</td>
+          </tr>
+          <tr>
+            <td data-label="日期">Day 4</td>
+            <td data-label="主题">峡谷轻松深度日</td>
+            <td data-label="住宿">Canyon</td>
+            <td data-label="路线核心">Grand Canyon of Yellowstone → Artist Point → Hayden Valley</td>
+          </tr>
+          <tr>
+            <td data-label="日期">Day 5</td>
+            <td data-label="主题">返程</td>
+            <td data-label="住宿">—</td>
+            <td data-label="路线核心">Canyon → North Entrance → Bozeman Airport</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>路线优化原因</h2>
+      <div class="grid">
+        <div class="card span-6">
+          <h3>为什么不做全覆盖？</h3>
+          <p>黄石景点分散、限速低、停车和动物堵路不可控。全覆盖路线会让每天变成“开车 + 找停车 + 打卡”，体验容易疲劳。</p>
+          <ul>
+            <li><span class="avoid">删除：</span>Lamar 深度、Jackson Town、长徒步、Upper Loop 全环线。</li>
+            <li><span class="good">保留：</span>Grand Prismatic、Old Faithful、Upper Basin、Yellowstone Lake、Hayden Valley、Lower Falls、Jenny Lake。</li>
+          </ul>
+        </div>
+        <div class="card span-6">
+          <h3>为什么 Canyon 连住两晚？</h3>
+          <p>Canyon 是黄石内部很好的中转点，靠近峡谷、Hayden Valley、Yellowstone Lake。连住可以避免每天收拾行李和反复 check in/out。</p>
+          <div class="note">这条路线的关键不是“少看”，而是把精力放在真正值得停留的地方。</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>详细行程</h2>
+
+      <div class="card day span-12">
+        <span class="day-number">Day 1</span>
+        <h3>Bozeman 恢复日</h3>
+        <p>15:00左右落地后，不建议当晚冲进黄石。完成取车、采购、晚餐和休息即可。</p>
+        <div class="route-line">
+          <span>BZN Airport</span><b>→</b><span>Belgrade / Bozeman</span>
+        </div>
+        <ul>
+          <li>采购：水、零食、早餐、保暖层、防雨装备。</li>
+          <li>目标：提前睡觉，第二天早起进园。</li>
+        </ul>
+        <div class="hotel">
+          <b>住宿推荐：</b>Hyatt Place Bozeman Yellowstone Airport；Holiday Inn Express & Suites Belgrade；如果想住市区氛围，可选 The LARK。
+        </div>
+      </div>
+
+      <div class="card day span-12">
+        <span class="day-number">Day 2</span>
+        <h3>Yellowstone 地热核心日</h3>
+        <p>这一天只抓黄石最经典的地热主线，不赶去 Canyon，避免第一天正式游玩就过载。</p>
+        <div class="route-line">
+          <span>Bozeman</span><b>→</b><span>North Entrance</span><b>→</b><span>Mammoth 短停</span><b>→</b><span>Grand Prismatic</span><b>→</b><span>Old Faithful</span><b>→</b><span>Upper Basin</span>
+        </div>
+        <ul>
+          <li>Grand Prismatic：优先 Fairy Falls Overlook，看完整彩虹热泉。</li>
+          <li>Old Faithful：不只看喷发，Upper Basin 木栈道才是重点。</li>
+          <li>可看 Morning Glory Pool、Castle Geyser、Riverside Geyser。</li>
+        </ul>
+        <div class="hotel">
+          <b>住宿推荐：</b>Old Faithful Lodge Cabins（性价比）；Old Faithful Snow Lodge（更舒适）；Old Faithful Inn（历史氛围）。
+        </div>
+      </div>
+
+      <div class="card day span-12">
+        <span class="day-number">Day 3</span>
+        <h3>Teton 半日 + Yellowstone Lake</h3>
+        <p>Teton 只作为风景调剂，保留雪山湖泊感，不安排长徒步和 Jackson 镇深度停留。</p>
+        <div class="route-line">
+          <span>Old Faithful</span><b>→</b><span>West Thumb</span><b>→</b><span>South Entrance</span><b>→</b><span>Jackson Lake</span><b>→</b><span>Jenny Lake</span><b>→</b><span>Yellowstone Lake</span><b>→</b><span>Hayden Valley</span><b>→</b><span>Canyon</span>
+        </div>
+        <ul>
+          <li>Jenny Lake：湖边散步、看雪山即可，不建议长徒步。</li>
+          <li>Yellowstone Lake：作为放松段落，适合停下来休息。</li>
+          <li>Hayden Valley：看到动物就停，没有也不用强求。</li>
+        </ul>
+        <div class="hotel">
+          <b>住宿推荐：</b>Canyon Lodge & Cabins。建议 Day 3–4 连住，减少换宿疲劳。
+        </div>
+      </div>
+
+      <div class="card day span-12">
+        <span class="day-number">Day 4</span>
+        <h3>Grand Canyon of Yellowstone 轻松深度日</h3>
+        <p>这一天不再环园，不补 Lamar，不做长距离赶路。重点放在峡谷、瀑布和 Hayden Valley 的轻松动物观测。</p>
+        <div class="route-line">
+          <span>Canyon</span><b>→</b><span>Lower Falls</span><b>→</b><span>Artist Point</span><b>→</b><span>Hayden Valley</span><b>→</b><span>Canyon</span>
+        </div>
+        <ul>
+          <li>Lower Falls：黄石最经典景观之一。</li>
+          <li>Artist Point：峡谷视角非常稳定，适合慢慢看。</li>
+          <li>下午可以早点回酒店休息，不必强行补景点。</li>
+        </ul>
+        <div class="hotel">
+          <b>住宿推荐：</b>继续 Canyon Lodge & Cabins 连住。
+        </div>
+      </div>
+
+      <div class="card day span-12">
+        <span class="day-number">Day 5</span>
+        <h3>返程日</h3>
+        <p>最后一天不安排正式景点。黄石路况可能受动物、施工、车流影响，返程要留足余量。</p>
+        <div class="route-line">
+          <span>Canyon</span><b>→</b><span>North Entrance</span><b>→</b><span>Bozeman Airport</span>
+        </div>
+        <div class="note">建议最晚 8:00–9:00 从 Canyon 出发，以降低赶飞机风险。</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>住宿推荐汇总</h2>
+      <div class="grid">
+        <div class="card span-4">
+          <h3>Day 1｜Bozeman / Belgrade</h3>
+          <ul>
+            <li>Hyatt Place Bozeman Yellowstone Airport</li>
+            <li>Holiday Inn Express & Suites Belgrade</li>
+            <li>The LARK（市区氛围型）</li>
+          </ul>
+        </div>
+        <div class="card span-4">
+          <h3>Day 2｜Old Faithful</h3>
+          <ul>
+            <li>Old Faithful Lodge Cabins</li>
+            <li>Old Faithful Snow Lodge</li>
+            <li>Old Faithful Inn</li>
+          </ul>
+        </div>
+        <div class="card span-4">
+          <h3>Day 3–4｜Canyon</h3>
+          <ul>
+            <li>Canyon Lodge & Cabins</li>
+            <li>核心优势：位置好、减少折返、适合峡谷和 Hayden Valley</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>最终保留与放弃</h2>
+      <div class="grid">
+        <div class="card span-6">
+          <h3>建议保留</h3>
+          <ul>
+            <li>Grand Prismatic</li>
+            <li>Old Faithful + Upper Basin</li>
+            <li>Yellowstone Lake</li>
+            <li>Hayden Valley</li>
+            <li>Lower Falls / Artist Point</li>
+            <li>Jenny Lake</li>
+          </ul>
+        </div>
+        <div class="card span-6">
+          <h3>建议放弃或弱化</h3>
+          <ul>
+            <li>Lamar Valley 深度动物观测</li>
+            <li>Jackson Town 深度停留</li>
+            <li>长徒步</li>
+            <li>Upper Loop 全环线</li>
+            <li>每天都换住宿</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Yellowstone 轻松版路线｜以黄石为主，Teton 点缀，减少疲劳，保留核心体验。
+  </footer>
+</body>
+</html>
